@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tourism Site Recommendation Project</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f8ff;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+            color: #333;
+        }
+        header {
+            background-color: forestgreen;
+            color: white;
+            padding: 10px 0;
+        }
+        main {
+            padding: 20px;
+        }
+        section {
+            margin: 20px auto;
+            padding: 20px;
+            background-color: white;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 800px;
+            border-radius: 10px;
+        }
+        footer {
+            margin-top: 20px;
+            padding: 10px 0;
+            background-color: forestgreen;
+            color: white;
+        }
+        a {
+            color: forestgreen;
+            text-decoration: none;
+        }
+    </style>
+    <script>
+        async function getRecommendation() {
+            const interest = document.getElementById("interest").value;
+            const response = await fetch("/recommend", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ interest: interest })
+            });
+            const data = await response.json();
+            alert("Recommended Destination: " + data.recommendation);
+        }
+    </script>
+</head>
+<body>
+    
+    <header>
+        <h1>Tourism Site Recommendation</h1>
+    </header>
+    <main>
+        <section>
+            <h2>Project Overview</h2>
+            <label for="interest">Select your interest:</label>
+            <select id="interest">
+                <option value="wildlife">Wildlife</option>
+                <option value="culture">Culture</option>
+                <option value="adventure">Adventure</option>
+                <option value="relaxation">Relaxation</option>
+                <option value="eco-tourism">Eco-Tourism</option>
+            </select>
+            <button onclick="getRecommendation()">Get Recommendation</button>
+        
+            <p>This project aims to recommend tourism destinations in Rwanda based on user interests, such as wildlife, culture, adventure, relaxation, and eco-tourism.</p>
+        </section>
+        <section>
+            <h2>Key Features</h2>
+            <ul>
+                <li>Personalized destination suggestions.</li>
+                <li>Simple decision tree logic for recommendations.</li>
+                <li>Focus on Rwanda's diverse tourist attractions.</li>
+            </ul>
+        </section>
+        <section>
+            <h2>Project Resources</h2>
+            <p><a href="flowchart.png" target="_blank">View Flowchart</a>|<a href="system architecture.png" target="_blank">view system architecture</a>|<a href="dataflow Diagram.png" target="_blank">View Dataflow Diagram</a>| <a href="Group10_Report_Assignment2_Day1.pdf" download>Download PDF Report</a></p>
+        </section> 
+    </main>
+    <footer>
+        &copy; 2025 Tourism Site Recommendation. All rights reserved.
+    </footer>
+</body>
+</html>
