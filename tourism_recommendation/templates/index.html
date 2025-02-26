@@ -39,38 +39,46 @@
             color: forestgreen;
             text-decoration: none;
         }
+        input, button {
+            padding: 10px;
+            margin-top: 10px;
+            font-size: 16px;
+        }
+        button {
+            background-color: forestgreen;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        button:hover {
+            background-color: darkgreen;
+        }
     </style>
     <script>
         async function getRecommendation() {
-            const interest = document.getElementById("interest").value;
-            const response = await fetch("/recommend", {
+            let interest = document.getElementById("interestInput").value;
+            if (!interest) {
+                alert("Please enter an interest!");
+                return;
+            }
+            let response = await fetch("/recommend", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ interest: interest })
             });
-            const data = await response.json();
+            let data = await response.json();
             alert("Recommended Destination: " + data.recommendation);
         }
     </script>
 </head>
 <body>
-    
     <header>
-        <h1>Tourism Site Recommendation</h1>
+        <h1>Tourism Site Recommendation Project</h1>
     </header>
     <main>
         <section>
             <h2>Project Overview</h2>
-            <label for="interest">Select your interest:</label>
-            <select id="interest">
-                <option value="wildlife">Wildlife</option>
-                <option value="culture">Culture</option>
-                <option value="adventure">Adventure</option>
-                <option value="relaxation">Relaxation</option>
-                <option value="eco-tourism">Eco-Tourism</option>
-            </select>
-            <button onclick="getRecommendation()">Get Recommendation</button>
-        
             <p>This project aims to recommend tourism destinations in Rwanda based on user interests, such as wildlife, culture, adventure, relaxation, and eco-tourism.</p>
         </section>
         <section>
@@ -82,18 +90,18 @@
             </ul>
         </section>
         <section>
+            <h2>Get Your Recommendation</h2>
+            <label for="interestInput">Enter your interest:</label>
+            <input type="text" id="interestInput" placeholder="e.g., wildlife, culture">
+            <button onclick="getRecommendation()">Get Recommendation</button>
+        </section>
+        <section>
             <h2>Project Resources</h2>
-            <p>
-                <a href="{{ url_for('static', filename='flowchart.png') }}" target="_blank">View Flowchart</a> |
-                <a href="{{ url_for('static', filename='system_architecture.png') }}" target="_blank">View System Architecture</a> |
-                <a href="{{ url_for('static', filename='dataflow_Diagram.png') }}" target="_blank">View Dataflow Diagram</a> |
-                <a href="{{ url_for('static', filename='Group10_Report_Assignment2_Day2.pdf') }}" download>Download PDF Report</a>
-            </p>
-            
+            <p><a href="flowchart.png" target="_blank">View Flowchart</a> | <a href="Group10_Report_Assignment2_Day1.pdf" download>Download PDF Report</a></p>
         </section> 
     </main>
     <footer>
-        &copy; 2025 Tourism Site Recommendation. All rights reserved.
+        &copy; 2025 Tourism Site Recommendation Project. All rights reserved.
     </footer>
 </body>
 </html>
