@@ -2,6 +2,7 @@ from flask import Flask, render_template, request, jsonify
 
 app = Flask(__name__)
 
+# Function to recommend a destination based on interest
 def recommend_destination(interest):
     interest = interest.lower()
     recommendations = {
@@ -13,10 +14,12 @@ def recommend_destination(interest):
     }
     return recommendations.get(interest, "No specific recommendation found. Try another interest.")
 
+# Route for the home page
 @app.route('/')
 def home():
     return render_template('index.html')
 
+# API route for getting recommendations
 @app.route('/recommend', methods=['POST'])
 def recommend():
     data = request.json
@@ -25,4 +28,5 @@ def recommend():
     return jsonify({"recommendation": recommendation})
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True, host='0.0.0.0', port=5000)
+
